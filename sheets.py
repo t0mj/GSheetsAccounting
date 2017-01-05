@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.6
+"""Methods to interact with google sheets api v4."""
 import httplib2
 import os
 
@@ -104,7 +106,3 @@ def update_cells(spreadsheet_id, data):
     result = service.spreadsheets().values().batchUpdate(
         spreadsheetId=spreadsheet_id, body=body).execute()
     return result
-
-
-if __name__ == '__main__':
-    get_sheet()

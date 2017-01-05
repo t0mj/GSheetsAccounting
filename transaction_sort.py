@@ -1,3 +1,8 @@
+#!/usr/bin/env python3.6
+"""
+Runs as a cron job to grab unprocessed transactions from the MTL and post them to their
+corresponding file and sheet.
+"""
 from datetime import datetime
 from sheets import append_data, get_sheet, update_cells
 import pandas as pd
@@ -30,9 +35,8 @@ def find_unprocessed_txns(mtl):
     df = pd.DataFrame(mtl)
     df.columns = headers
     df = df[df.Processed != 'Yes']
-    if not len(df):
-        return df
-    df = adjust_debits_credits(df)
+    if len(df):
+        df = adjust_debits_credits(df)
     return df
 
 
